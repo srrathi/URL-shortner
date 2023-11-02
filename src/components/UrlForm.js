@@ -11,7 +11,7 @@ const UrlForm = () => {
   const copyClipboardBtnClick = (e) => {
     e.preventDefault();
     setTooltipText("Copied to Clipboard");
-    navigator.clipboard.writeText(`https://srrathi-url-shortner.netlify.app/${shortUrlCode}`).then(
+    navigator.clipboard.writeText(`${window.location.origin}/${shortUrlCode}`).then(
       function () {
         // console.log('Copying to clipboard was successful!');
       },
@@ -71,7 +71,7 @@ const UrlForm = () => {
               textAlign: "center",
             }}
           >
-            http://localhost4000/{shortUrlCode}
+            {window.location.origin}/{shortUrlCode}
           </p>
           <button onClick={(e) => copyClipboardBtnClick(e)} className="tooltip">
             <i className="fas fa-2x fa-copy"></i>
