@@ -11,7 +11,9 @@ const UrlForm = () => {
   const copyClipboardBtnClick = (e) => {
     e.preventDefault();
     setTooltipText("Copied to Clipboard");
-    navigator.clipboard.writeText(`${window.location.origin}/${shortUrlCode}`).then(
+    const newUrl = `${window.location.origin}/${shortUrlCode}`;
+    // console.log("newUrl", newUrl);
+    navigator.clipboard.writeText(newUrl).then(
       function () {
         // console.log('Copying to clipboard was successful!');
       },

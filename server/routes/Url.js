@@ -3,9 +3,6 @@ const validUrl = require("valid-url");
 const router = express.Router();
 const Url = require("../models/UrlSchema");
 
-// The API base Url endpoint
-const baseUrl = "https://srrathi-url-shortner.netlify.app";
-
 const randomeCode = (length = 5) => {
   var result = "";
   var characters =
@@ -22,7 +19,7 @@ router.post("/shorten", async (req, res) => {
   var urlCode = "";
 
   // check base url if valid using the validUrl.isUri method
-  if (!validUrl.isUri(baseUrl)) {
+  if (!validUrl.isUri(req.get('origin'))) {
     return res.status(401).json("Invalid base URL");
   }
 
@@ -49,7 +46,7 @@ router.post("/shorten", async (req, res) => {
         res.json(url);
       } else {
         // join the generated short code the the base url
-        const shortUrl = baseUrl + "/" + urlCode;
+        const shortUrl = req.get('origin') + "/" + urlCode;
 
         // invoking the Url model and saving to the DB
         url = new Url({
